@@ -12,17 +12,15 @@ declare enum CATEGORY {
 declare interface Airport {
   name: string;
   code: string;
-  points: { [key: any]: Poi };
+  points: { [key: string]: Poi };
 }
 
 declare interface Poi {
-  [key: string]: {
-    id: string;
-    category: CATEGORY;
-    x: number;
-    y: number;
-    connected: string[];
-    name?: string;
-    location?: string;
-  };
+  id: string;
+  category: CATEGORY;
+  x: number;
+  y: number;
+  connected: string[];
+  name?: string;
+  location?: string;
 }
