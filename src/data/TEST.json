@@ -100,8 +100,8 @@
       "connected": ["H4", "H5", "H6"]
     },
     "F0": {
-      "id": "R0",
-      "category": "Restroom",
+      "id": "F0",
+      "category": "Food",
       "name": "Food Stuff",
       "location": "Between Gate 1 and Gate 2",
       "x": 40,
