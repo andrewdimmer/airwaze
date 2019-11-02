@@ -1,0 +1,112 @@
+{
+  "name": "The SquarePort",
+  "code": "TEST",
+  "points": {
+    "G0": {
+      "id": "G0",
+      "category": "Gate",
+      "name": "Gate 0",
+      "x": 20,
+      "y": 20,
+      "connected": ["H0", "H1"]
+    },
+    "G1": {
+      "id": "G1",
+      "category": "Gate",
+      "name": "Gate 1",
+      "x": 60,
+      "y": 20,
+      "connected": ["H1", "H2", "H3"]
+    },
+    "G2": {
+      "id": "G2",
+      "category": "Gate",
+      "name": "Gate 2",
+      "x": 100,
+      "y": 20,
+      "connected": ["H3", "H4", "H5"]
+    },
+    "G3": {
+      "id": "G3",
+      "category": "Gate",
+      "name": "Gate 3",
+      "x": 140,
+      "y": 20,
+      "connected": ["H5", "H6"]
+    },
+    "H0": {
+      "id": "H0",
+      "category": "Hallway",
+      "x": 20,
+      "y": 40,
+      "connected": ["H1", "G0", "R0"]
+    },
+    "H1": {
+      "id": "H1",
+      "category": "Hallway",
+      "x": 40,
+      "y": 40,
+      "connected": ["H0", "H2", "G0", "G1", "R0"]
+    },
+    "H2": {
+      "id": "H2",
+      "category": "Hallway",
+      "x": 60,
+      "y": 40,
+      "connected": ["H1", "H3", "G1", "F0", "R0"]
+    },
+    "H3": {
+      "id": "H3",
+      "category": "Hallway",
+      "x": 80,
+      "y": 40,
+      "connected": ["H2", "H4", "G1", "G2", "F0"]
+    },
+    "H4": {
+      "id": "H4",
+      "category": "Hallway",
+      "x": 100,
+      "y": 40,
+      "connected": ["H3", "H5", "G2", "F0", "R1"]
+    },
+    "H5": {
+      "id": "H5",
+      "category": "Hallway",
+      "x": 120,
+      "y": 40,
+      "connected": ["H4", "H6", "G2", "G3", "R1"]
+    },
+    "H6": {
+      "id": "H6",
+      "category": "Hallway",
+      "x": 140,
+      "y": 40,
+      "connected": ["H5", "G3", "R1"]
+    },
+    "R0": {
+      "id": "R0",
+      "category": "Restroom",
+      "location": "Between Gate 0 and Gate 1",
+      "x": 40,
+      "y": 60,
+      "connected": ["H0", "H1", "H2"]
+    },
+    "R1": {
+      "id": "R1",
+      "category": "Restroom",
+      "location": "Between Gate 2 and Gate 3",
+      "x": 120,
+      "y": 60,
+      "connected": ["H4", "H5", "H6"]
+    },
+    "F0": {
+      "id": "R0",
+      "category": "Restroom",
+      "name": "Food Stuff",
+      "location": "Between Gate 1 and Gate 2",
+      "x": 40,
+      "y": 60,
+      "connected": ["H2", "H3", "H4"]
+    }
+  }
+}
