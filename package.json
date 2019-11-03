@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.30",
+    "@material-ui/styles": "^4.5.2",
     "@types/jest": "24.0.21",
     "@types/node": "12.12.5",
     "@types/react": "16.9.11",
@@ -13,6 +15,7 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
+    "sweetalert": "^2.1.2",
     "typescript": "3.6.4"
   },
   "scripts": {
