@@ -4,12 +4,19 @@ declare interface DijstraNode {
   visited: boolean;
 }
 
-const dijstra = (airport: Airport, from: string, to: string): string[] => {
+const dijstra = (
+  airport: Airport,
+  fromId: string,
+  toName: string
+): string[] => {
+  if (!fromId || !toName) {
+    return [];
+  }
   const nodes: { [key: string]: DijstraNode } = {};
   for (const poi in airport.points) {
     nodes[poi] = { dist: -1, parent: null, visited: false };
   }
-  nodes[from] = {
+  nodes[fromId] = {
     dist: 0,
     parent: null,
     visited: false
@@ -20,9 +27,9 @@ const dijstra = (airport: Airport, from: string, to: string): string[] => {
     // Update all of the adjacent nodes
     const minNodePoi = airport.points[minNodeIndex];
     nodes[minNodeIndex].visited = true;
-    console.log(minNodeIndex, minNode);
     if (minNode) {
       for (const nodeIndex of minNodePoi.connected) {
+        // TODO: Add if for transit lines here
         const currentNodePoi = airport.points[nodeIndex];
         const oldDist = nodes[nodeIndex].dist;
         const xDiff = minNodePoi.x - currentNodePoi.x;
@@ -38,8 +45,26 @@ const dijstra = (airport: Airport, from: string, to: string): string[] => {
       }
     }
   }
-  console.log(nodes);
-  return [];
+  let toId: string | null = null;
+  for (const poiIndex in airport.points) {
+    const poiData = airport.points[poiIndex];
+    if (poiData.name === toName) {
+      if (!toId || nodes[toId].dist < nodes[poiIndex].dist) {
+        toId = poiIndex;
+      }
+    } else if (poiData.category === toName) {
+      if (!toId || nodes[toId].dist > nodes[poiIndex].dist) {
+        toId = poiIndex;
+      }
+    }
+  }
+  let currentNodeIndex: string | null = toId;
+  const path: string[] = [];
+  while (currentNodeIndex) {
+    path.unshift(currentNodeIndex);
+    currentNodeIndex = nodes[currentNodeIndex].parent;
+  }
+  return path;
 };
 
 const dijstraSelectMin = (nodes: {
