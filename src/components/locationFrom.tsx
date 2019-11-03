@@ -1,24 +1,24 @@
-import { Typography, Grid, TextField } from "@material-ui/core";
-import React, { Fragment } from "react";
+import { Grid, TextField, Typography } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import CropFreeIcon from "@material-ui/icons/CropFree";
+import React from "react";
 import swal from "sweetalert";
+import { fromDropdownList } from "../scripts/locationDropdowns";
 interface FromProps {
   airports: Airport[];
   airport: Airport | null;
-  setAirport: Function;
+  from: { id: string; label: string } | null;
   classes: any;
-  fromID: string;
-  setFromID: Function;
+  handleChangeAirport: (newAirport: Airport) => void;
+  handleChangeFromId: (newFromId: { id: string; label: string } | null) => void;
 }
 
 const locationFrom: React.FunctionComponent<FromProps> = ({
   airports,
   airport,
-  setAirport,
+  from,
   classes,
-  fromID,
-  setFromID
+  handleChangeAirport,
+  handleChangeFromId
 }) => {
   return (
     <Grid
@@ -35,10 +35,12 @@ const locationFrom: React.FunctionComponent<FromProps> = ({
           <Grid item>
             <Autocomplete
               options={airports}
-              getOptionLabel={(option: Airport) => option.name}
+              getOptionLabel={(option: Airport) =>
+                `${option.name} (${option.code})`
+              }
               className={classes.lowerPadded}
               onChange={(event, value) => {
-                setAirport(value);
+                handleChangeAirport(value);
               }}
               renderInput={params => (
                 <TextField
@@ -52,14 +54,20 @@ const locationFrom: React.FunctionComponent<FromProps> = ({
           </Grid>
           <Grid item>
             <Autocomplete
-              options={airport ? [] : [{ label: "Please select an airport" }]}
-              getOptionDisabled={(option: any) =>
+              options={
+                airport
+                  ? fromDropdownList(airport)
+                  : [{ label: "Please select an airport" }]
+              }
+              getOptionDisabled={(option: { id: string; label: string }) =>
                 option.label === "Please select an airport"
               }
-              getOptionLabel={(option: any) => option.label}
+              getOptionLabel={(option: { id: string; label: string }) =>
+                option.label
+              }
               style={{ width: "100%" }}
               onChange={(event, value) => {
-                setFromID(value);
+                handleChangeFromId(value);
               }}
               renderInput={params => (
                 <TextField
@@ -75,6 +83,7 @@ const locationFrom: React.FunctionComponent<FromProps> = ({
       </Grid>
       <Grid item xs={3} sm={2} md={1}>
         <img
+          alt="Scan a QR Code"
           src="https://static.thenounproject.com/png/1433173-200.png"
           width="100%"
           onClick={() => {

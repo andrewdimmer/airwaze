@@ -88,7 +88,53 @@
       "category": "Hallway",
       "x": 640,
       "y": 200,
-      "connected": ["H6", "G3"]
+      "connected": [
+        "H6",
+        "G3",
+        "F1",
+        "I0",
+        "I1",
+        "I2",
+        "L0",
+        "L1",
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "S0"
+      ]
+    },
+    "P0": {
+      "id": "P0",
+      "category": "Parking and Transportation",
+      "name": "Short Term Parking",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "P1": {
+      "id": "P1",
+      "category": "Parking and Transportation",
+      "name": "Long Term Parking",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "P2": {
+      "id": "P2",
+      "category": "Parking and Transportation",
+      "name": "Taxi and Bus Pickup",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "P3": {
+      "id": "P3",
+      "category": "Parking and Transportation",
+      "name": "Ride Share",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
     },
     "R0": {
       "id": "R0",
@@ -114,6 +160,65 @@
       "x": 320,
       "y": 280,
       "connected": ["H2", "H3", "H4"]
+    },
+    "F1": {
+      "id": "F1",
+      "category": "Food",
+      "name": "FoodWay",
+      "location": "By Security",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "L0": {
+      "id": "L0",
+      "category": "Luggage Claim",
+      "name": "Luggage Claim 0",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "L1": {
+      "id": "L1",
+      "category": "Luggage Claim",
+      "name": "Luggage Claim 1",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "I0": {
+      "id": "I0",
+      "category": "Information and Services",
+      "name": "Ticketing",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "I1": {
+      "id": "I1",
+      "category": "Information and Services",
+      "name": "Security",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "I2": {
+      "id": "I2",
+      "category": "Information and Services",
+      "name": "StayHere Hotel",
+      "location": "By Long Term Parking",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
+    },
+    "S0": {
+      "id": "S0",
+      "category": "Shopping",
+      "name": "StuffMart",
+      "location": "By Short Term Parking",
+      "x": 700,
+      "y": 200,
+      "connected": ["H7"]
     }
   },
   "scale1width": 640,
