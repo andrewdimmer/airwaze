@@ -8,6 +8,7 @@ interface FromProps {
   airport: Airport | null;
   from: { id: string; label: string } | null;
   classes: any;
+  handleOpen: Function;
   handleChangeAirport: (newAirport: Airport) => void;
   handleChangeFromId: (newFromId: { id: string; label: string } | null) => void;
 }
@@ -18,7 +19,8 @@ const locationFrom: React.FunctionComponent<FromProps> = ({
   from,
   classes,
   handleChangeAirport,
-  handleChangeFromId
+  handleChangeFromId,
+  handleOpen
 }) => {
   return (
     <Grid
@@ -87,7 +89,7 @@ const locationFrom: React.FunctionComponent<FromProps> = ({
           src="https://static.thenounproject.com/png/1433173-200.png"
           width="100%"
           onClick={() => {
-            swal("This will be the QR Code Scanner");
+            handleOpen();
           }}
         />
       </Grid>

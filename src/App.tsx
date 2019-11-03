@@ -5,7 +5,10 @@ import {
   Typography,
   ExpansionPanel,
   ExpansionPanelSummary,
-  ExpansionPanelDetails
+  ExpansionPanelDetails,
+  Modal,
+  Backdrop,
+  Fade
 } from "@material-ui/core";
 import LocationFrom from "./components/locationFrom";
 import { styles } from "./styles";
@@ -15,6 +18,8 @@ import LocationTo from "./components/locationTo";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MapCanvas from "./components/mapCanvas";
+import QrReader from "react-qr-reader";
+import swal from "sweetalert";
 
 const airports: Airport[] = [SquarePortData, DTWData];
 
@@ -26,6 +31,15 @@ const App: React.FC = () => {
   const [toCategory, setToCategory] = React.useState<string>("");
   const [toName, setToName] = React.useState<string>("");
   const [expand, setExpand] = React.useState<boolean>(true);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleChangeAirport = (newAirport: Airport) => {
     setAirport(newAirport);
@@ -36,6 +50,7 @@ const App: React.FC = () => {
   const handleChangeFromId = (
     newFromId: { id: string; label: string } | null
   ) => {
+    console.log(newFromId);
     setFrom(newFromId);
   };
   const handleChangeToCategory = (newToCategory: string) => {
@@ -49,9 +64,61 @@ const App: React.FC = () => {
     setToName(newToName);
   };
 
+  const handleError = (err: any) => {
+    swal(err);
+  };
+
+  const handleScan = (data: any) => {
+    if (data) {
+      handleChangeAirport(
+        data.slice(0, data.indexOf("_")) == "TEST" ? airports[0] : airports[1]
+      );
+      handleChangeFromId({
+        id: data.slice(data.indexOf("_") + 1, data.indexOf("-")),
+        label: data.slice(data.indexOf("-") + 1, data.length - 1)
+      });
+      //setFrom();
+      handleClose();
+      swal(
+        "Scanned Succesfully",
+        "The dropdowns will not update, but the data has been entered, please slect your destination.",
+        "success"
+      );
+    }
+  };
+
   const classes = styles();
   return (
     <div className={classes.mapContainerOuter}>
+      <div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500
+          }}
+        >
+          <div style={{ width: "75%" }}>
+            <Fade in={open}>
+              <QrReader
+                delay={300}
+                onError={err => {
+                  handleError(err);
+                }}
+                onScan={data => {
+                  handleScan(data);
+                }}
+                style={{ width: "100%" }}
+              />
+            </Fade>
+          </div>
+        </Modal>
+      </div>
       <CssBaseline />
 
       <div className={classes.dropdownContainer}>
@@ -86,6 +153,7 @@ const App: React.FC = () => {
                   classes={classes}
                   handleChangeAirport={handleChangeAirport}
                   handleChangeFromId={handleChangeFromId}
+                  handleOpen={handleOpen}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
