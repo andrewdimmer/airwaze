@@ -1,0 +1,30 @@
+{
+  "name": "Detroit Metropolitan Wayne County Airport",
+  "code": "DTW",
+  "points": {
+    "H1": {
+      "id": "H1",
+      "category": "Hallway",
+      "x": 2500,
+      "y": 1000,
+      "connected": ["H2"]
+    },
+    "H2": {
+      "id": "H2",
+      "category": "Hallway",
+      "x": 3000,
+      "y": 1000,
+      "connected": ["H1", "H3"]
+    },
+    "H3": {
+      "id": "H3",
+      "category": "Hallway",
+      "x": 3500,
+      "y": 1000,
+      "connected": ["H2"]
+    }
+  },
+  "scale1width": 6000,
+  "scale1height": 2000,
+  "imageName": "DTW_Map.png"
+}
