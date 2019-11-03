@@ -1,14 +1,3 @@
-declare enum CATEGORY {
-  "Food",
-  "Gate",
-  "Hallway",
-  "Information and Services",
-  "Luggage Claim",
-  "Parking and Transportation",
-  "Restroom",
-  "Shopping"
-}
-
 declare interface Airport {
   name: string;
   code: string;
