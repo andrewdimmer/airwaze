@@ -17,7 +17,7 @@ declare interface Airport {
 
 declare interface Poi {
   id: string;
-  category: CATEGORY;
+  category: string;
   x: number;
   y: number;
   connected: string[];
