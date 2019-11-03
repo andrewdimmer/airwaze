@@ -1,32 +1,28 @@
-import { Typography, Grid, TextField } from "@material-ui/core";
-import React, { Fragment } from "react";
+import { Grid, TextField, Typography } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import CropFreeIcon from "@material-ui/icons/CropFree";
+import React from "react";
+import { toDropdownList } from "../scripts/locationDropdowns";
+
 interface ToProps {
-  airports: Airport[];
   airport: Airport | null;
-  setAirport: Function;
   classes: any;
   toCategory: string;
-  setToCategory: Function;
   toName: string;
-  setToName: Function;
+  handleChangeToCategory: (newToCategory: string) => void;
+  handleChangeToName: (newToName: string) => void;
 }
 
 const locationTo: React.FunctionComponent<ToProps> = ({
-  airports, //TODO make these autocompletes use the actual lists
   airport,
-  setAirport,
   classes,
   toCategory,
-  setToCategory,
   toName,
-  setToName
+  handleChangeToCategory,
+  handleChangeToName
 }) => {
   const categories: string[] = [
     "Food",
     "Gate",
-    "Hallway",
     "Information and Services",
     "Luggage Claim",
     "Parking and Transportation",
@@ -46,7 +42,7 @@ const locationTo: React.FunctionComponent<ToProps> = ({
               getOptionLabel={(option: string) => option}
               className={classes.lowerPadded}
               onChange={(event, value) => {
-                setToCategory(value);
+                handleChangeToCategory(value);
               }}
               renderInput={params => (
                 <TextField
@@ -60,12 +56,19 @@ const locationTo: React.FunctionComponent<ToProps> = ({
           </Grid>
           <Grid item>
             <Autocomplete
-              options={toCategory ? [] : ["Please select a category"]}
+              options={
+                toCategory && airport
+                  ? toDropdownList(airport, toCategory)
+                  : ["Please select an airport and category"]
+              }
               getOptionDisabled={(option: any) =>
-                option === "Please select a category"
+                option === "Please select an airport and category"
               }
               getOptionLabel={(option: any) => option}
               style={{ width: "100%" }}
+              onChange={(event, value) => {
+                handleChangeToName(value);
+              }}
               renderInput={params => (
                 <TextField
                   {...params}
