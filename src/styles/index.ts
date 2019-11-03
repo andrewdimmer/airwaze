@@ -56,6 +56,15 @@ export const styles = makeStyles((theme: Theme) =>
       border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3)
+    },
+    zoomContainer: {
+      position: "absolute",
+      bottom: "0px",
+      right: "0px",
+      padding: theme.spacing(2)
+    },
+    zoomButton: {
+      margin: theme.spacing(1)
     }
   })
 );

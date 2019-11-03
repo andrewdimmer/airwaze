@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "./App.css";
 import {
   Grid,
@@ -8,7 +8,8 @@ import {
   ExpansionPanelDetails,
   Modal,
   Backdrop,
-  Fade
+  Fade,
+  Fab
 } from "@material-ui/core";
 import LocationFrom from "./components/locationFrom";
 import { styles } from "./styles";
@@ -20,6 +21,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import MapCanvas from "./components/mapCanvas";
 import QrReader from "react-qr-reader";
 import swal from "sweetalert";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import CropFreeIcon from "@material-ui/icons/CropFree";
+import BugReportIcon from "@material-ui/icons/BugReport";
 
 const airports: Airport[] = [SquarePortData, DTWData];
 
@@ -32,6 +37,8 @@ const App: React.FC = () => {
   const [toName, setToName] = React.useState<string>("");
   const [expand, setExpand] = React.useState<boolean>(true);
   const [open, setOpen] = React.useState(false);
+  const [scaleFactor, setScaleFactor] = React.useState(1);
+  const [debugInfo, setDebugInfo] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -45,6 +52,9 @@ const App: React.FC = () => {
     setAirport(newAirport);
     setFrom(null);
     setToName("");
+    setScaleFactor(
+      Math.min(1, newAirport ? window.innerWidth / newAirport.scale1width : 1)
+    );
   };
 
   const handleChangeFromId = (
@@ -71,7 +81,7 @@ const App: React.FC = () => {
   const handleScan = (data: any) => {
     if (data) {
       handleChangeAirport(
-        data.slice(0, data.indexOf("_")) == "TEST" ? airports[0] : airports[1]
+        data.slice(0, data.indexOf("_")) === "TEST" ? airports[0] : airports[1]
       );
       handleChangeFromId({
         id: data.slice(data.indexOf("_") + 1, data.indexOf("-")),
@@ -103,17 +113,20 @@ const App: React.FC = () => {
             timeout: 500
           }}
         >
-          <div style={{ width: "75%" }}>
+          <div
+            style={{
+              width: "60%"
+            }}
+          >
             <Fade in={open}>
               <QrReader
                 delay={300}
-                onError={err => {
+                onError={(err: any) => {
                   handleError(err);
                 }}
-                onScan={data => {
+                onScan={(data: any) => {
                   handleScan(data);
                 }}
-                style={{ width: "100%" }}
               />
             </Fade>
           </div>
@@ -175,12 +188,54 @@ const App: React.FC = () => {
         classes={classes}
         fromId={from ? from.id : ""}
         toName={toName}
-        debug={true}
-        scaleFactor={Math.min(
-          1,
-          airport ? window.innerWidth / airport.scale1width : 1
-        )}
+        debug={debugInfo}
+        scaleFactor={scaleFactor}
       />
+      {airport && !expand && (
+        <div className={classes.zoomContainer}>
+          <Fab
+            color="primary"
+            className={classes.zoomButton}
+            onClick={() => {
+              setScaleFactor(scaleFactor * 1.1);
+            }}
+          >
+            <AddIcon />
+          </Fab>
+          <Fab
+            color="primary"
+            className={classes.zoomButton}
+            onClick={() => {
+              setScaleFactor(scaleFactor * 0.9);
+            }}
+          >
+            <RemoveIcon />
+          </Fab>
+          <Fab
+            color="primary"
+            className={classes.zoomButton}
+            onClick={() => {
+              setScaleFactor(
+                Math.min(
+                  1,
+                  airport ? window.innerWidth / airport.scale1width : 1
+                )
+              );
+            }}
+          >
+            <CropFreeIcon />
+          </Fab>
+          <Fab
+            color="primary"
+            className={classes.zoomButton}
+            onClick={() => {
+              setDebugInfo(!debugInfo);
+            }}
+          >
+            <BugReportIcon />
+          </Fab>
+        </div>
+      )}
     </div>
   );
 };

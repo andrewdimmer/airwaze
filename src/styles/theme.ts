@@ -3,8 +3,8 @@ import { blue, indigo, red } from "@material-ui/core/colors";
 
 export const THEME = createMuiTheme({
   palette: {
-    primary: blue,
-    secondary: red,
+    primary: { main: "#B1DDF1" },
+    secondary: blue,
     error: red
   }
 });
