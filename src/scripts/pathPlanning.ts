@@ -21,20 +21,29 @@ const dijstra = (
     parent: null,
     visited: false
   };
+  console.log(nodes);
   for (const _ in nodes) {
     // Select the smallest distance node that has not been visited
     const { minNodeIndex, minNode } = dijstraSelectMin(nodes);
     // Update all of the adjacent nodes
-    const minNodePoi = airport.points[minNodeIndex];
-    nodes[minNodeIndex].visited = true;
     if (minNode) {
+      const minNodePoi = airport.points[minNodeIndex];
+      nodes[minNodeIndex].visited = true;
       for (const nodeIndex of minNodePoi.connected) {
         // TODO: Add if for transit lines here
         const currentNodePoi = airport.points[nodeIndex];
         const oldDist = nodes[nodeIndex].dist;
-        const xDiff = minNodePoi.x - currentNodePoi.x;
-        const yDiff = minNodePoi.y - currentNodePoi.y;
-        const newDist = minNode.dist + xDiff * xDiff + yDiff * yDiff;
+        let newDist = minNode.dist;
+        if (
+          minNodePoi.x >= 0 &&
+          minNodePoi.x >= 0 &&
+          currentNodePoi.x >= 0 &&
+          currentNodePoi.y >= 0
+        ) {
+          const xDiff = minNodePoi.x - currentNodePoi.x;
+          const yDiff = minNodePoi.y - currentNodePoi.y;
+          newDist += (xDiff * xDiff + yDiff * yDiff) ** (1 / 2);
+        }
         if (oldDist < 0 || oldDist > newDist) {
           nodes[nodeIndex] = {
             dist: newDist,
@@ -44,6 +53,7 @@ const dijstra = (
         }
       }
     }
+    console.log(minNodeIndex + " Success");
   }
   let toId: string | null = null;
   for (const poiIndex in airport.points) {

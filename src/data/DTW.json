@@ -2,26 +2,205 @@
   "name": "Detroit Metropolitan Wayne County Airport",
   "code": "DTW",
   "points": {
+    "H0": {
+      "id": "H0",
+      "category": "Hallway",
+      "x": 600,
+      "y": 1080,
+      "connected": ["H1"]
+    },
     "H1": {
       "id": "H1",
       "category": "Hallway",
-      "x": 2500,
-      "y": 1000,
-      "connected": ["H2"]
+      "x": 700,
+      "y": 1080,
+      "connected": ["H0", "H2"]
     },
     "H2": {
       "id": "H2",
       "category": "Hallway",
-      "x": 3000,
-      "y": 1000,
+      "x": 800,
+      "y": 1079,
       "connected": ["H1", "H3"]
     },
     "H3": {
       "id": "H3",
       "category": "Hallway",
-      "x": 3500,
-      "y": 1000,
-      "connected": ["H2"]
+      "x": 900,
+      "y": 1079,
+      "connected": ["H2", "H4", "T0"]
+    },
+    "H4": {
+      "id": "H4",
+      "category": "Hallway",
+      "x": 1000,
+      "y": 1078,
+      "connected": ["H3", "H5", "T0"]
+    },
+    "H5": {
+      "id": "H5",
+      "category": "Hallway",
+      "x": 1100,
+      "y": 1078,
+      "connected": ["H4", "H6"]
+    },
+    "H6": {
+      "id": "H6",
+      "category": "Hallway",
+      "x": 1200,
+      "y": 1077,
+      "connected": ["H5", "H7"]
+    },
+    "H7": {
+      "id": "H7",
+      "category": "Hallway",
+      "x": 1300,
+      "y": 1077,
+      "connected": ["H6", "H8"]
+    },
+    "H8": {
+      "id": "H8",
+      "category": "Hallway",
+      "x": 1400,
+      "y": 1076,
+      "connected": ["H7", "H9"]
+    },
+    "H9": {
+      "id": "H9",
+      "category": "Hallway",
+      "x": 1500,
+      "y": 1076,
+      "connected": ["H8", "H10"]
+    },
+    "H10": {
+      "id": "H10",
+      "category": "Hallway",
+      "x": 1600,
+      "y": 1075,
+      "connected": ["H9", "H11"]
+    },
+    "H11": {
+      "id": "H11",
+      "category": "Hallway",
+      "x": 1700,
+      "y": 1075,
+      "connected": ["H10", "H12"]
+    },
+    "H12": {
+      "id": "H12",
+      "category": "Hallway",
+      "x": 1800,
+      "y": 1074,
+      "connected": ["H11", "H13"]
+    },
+    "H13": {
+      "id": "H13",
+      "category": "Hallway",
+      "x": 1900,
+      "y": 1074,
+      "connected": ["H12", "H14"]
+    },
+    "H14": {
+      "id": "H14",
+      "category": "Hallway",
+      "x": 2000,
+      "y": 1073,
+      "connected": ["H13", "H15"]
+    },
+    "H15": {
+      "id": "H15",
+      "category": "Hallway",
+      "x": 2100,
+      "y": 1073,
+      "connected": ["H13", "H15"]
+    },
+    "H16": {
+      "id": "H16",
+      "category": "Hallway",
+      "x": 2200,
+      "y": 1072,
+      "connected": ["H15", "H17"]
+    },
+    "H17": {
+      "id": "H17",
+      "category": "Hallway",
+      "x": 2300,
+      "y": 1072,
+      "connected": ["H16", "H18"]
+    },
+    "H18": {
+      "id": "H18",
+      "category": "Hallway",
+      "x": 2400,
+      "y": 1071,
+      "connected": ["H17", "H19"]
+    },
+    "H19": {
+      "id": "H11",
+      "category": "Hallway",
+      "x": 2500,
+      "y": 1071,
+      "connected": ["H18", "H10"]
+    },
+    "H20": {
+      "id": "H20",
+      "category": "Hallway",
+      "x": 2600,
+      "y": 1070,
+      "connected": ["H19", "H21"]
+    },
+    "H21": {
+      "id": "H21",
+      "category": "Hallway",
+      "x": 2700,
+      "y": 1070,
+      "connected": ["H20", "H22"]
+    },
+    "H22": {
+      "id": "H22",
+      "category": "Hallway",
+      "x": 2800,
+      "y": 1069,
+      "connected": ["H21", "H23"]
+    },
+    "H23": {
+      "id": "H23",
+      "category": "Hallway",
+      "x": 2900,
+      "y": 1069,
+      "connected": ["H22", "H24"]
+    },
+    "H24": {
+      "id": "H24",
+      "category": "Hallway",
+      "x": 3000,
+      "y": 1068,
+      "connected": ["H23", "H25", "T1"]
+    },
+    "H25": {
+      "id": "H25",
+      "category": "Hallway",
+      "x": 3100,
+      "y": 1068,
+      "connected": ["H24", "T1"]
+    },
+    "T0": {
+      "id": "T0",
+      "category": "Parking and Transportation",
+      "name": "Sky Tram",
+      "location": "By Gate A15",
+      "x": 950,
+      "y": 1110,
+      "connected": ["H3", "H4", "T1"]
+    },
+    "T1": {
+      "id": "T1",
+      "category": "Parking and Transportation",
+      "name": "Sky Tram",
+      "location": "By Gate A40",
+      "x": 3100,
+      "y": 1140,
+      "connected": ["H24", "H25", "T0"]
     }
   },
   "scale1width": 6000,
